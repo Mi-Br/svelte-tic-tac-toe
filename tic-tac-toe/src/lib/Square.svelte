@@ -1,11 +1,18 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   export let Value;
   export let Id;
+  const dispatch = createEventDispatcher();
+  function handleClick(id) {
+    dispatch("squareClicked", { id: id });
+  }
 </script>
 
-<div class="square" id={Id}>
-  {Value}
-</div>
+<button class="square" id={Id} on:click={() => handleClick(Id)}>
+  {#if Value != null}
+    {Value}
+  {/if}
+</button>
 
 <style>
   .square {
